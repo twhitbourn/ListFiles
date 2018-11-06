@@ -16,5 +16,29 @@ namespace ListFiles
         {
             InitializeComponent();
         }
+
+        private void textBox1_MouseMove(object sender, MouseEventArgs e)
+        {
+
+            if (e.Button == MouseButtons.Left)
+            {
+                if (!String.IsNullOrEmpty(this.tboxFiles.Text))
+                {
+                    string[] files = tboxFiles.Lines;
+                    string dataFormat = DataFormats.FileDrop;
+                    DataObject dataObject = new DataObject(dataFormat, files);
+
+                    this.tboxFiles.DoDragDrop(dataObject, DragDropEffects.Copy);
+                }
+            }
+        }
+
+        private void Form1_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.Control && e.KeyCode == Keys.A)
+            {
+                this.tboxFiles.SelectAll();
+            }
+        }
     }
 }
